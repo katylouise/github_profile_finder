@@ -1,6 +1,7 @@
 describe('Github Profile finder', function() {
   var searchBox = element(by.model('searchCtrl.searchTerm'));
   var searchButton = element(by.className('btn'));
+  var searchedFor = element(by.)
 
   beforeEach(function() {
     browser.get('http://localhost:8080');
@@ -32,6 +33,12 @@ describe('Github Profile finder', function() {
     element.all(by.repeater('user in searchCtrl.searchResult.items')).then(function(items) {
         expect(items.length).toBe(30);
     });
+  });
+
+  it('shows the search term', function() {
+    searchBox.sendKeys('spike');
+    searchButton.click();
+    expect()
   });
   //   var profiles = element.all(by.repeater('user in searchCtrl.searchResult.items'));
   //   expect(profiles.length).toBe(20);
