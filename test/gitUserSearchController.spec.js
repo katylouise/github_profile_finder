@@ -2,11 +2,11 @@
 describe('GitUserSearchController', function() {
   beforeEach(module('GitUserSearch'));
   var ctrl;
-  var dummy = new Dummy();
   var fakeSearch;
   var q, scope;
   //assign all vars needed
 
+  //provider must be created before inject happens
   beforeEach(function() {
     module(function($provide) {
       fakeSearch = jasmine.createSpyObj('fakeSearch', ['query']);
@@ -19,10 +19,12 @@ describe('GitUserSearchController', function() {
     });
   });
 
+  //you can do multiple injects but neater to have everything in one
   beforeEach(inject(function($q, $rootScope, $controller) {
     scope = $rootScope; //assign scope to root scope (global)
     ctrl = $controller('GitUserSearchController'); //controller to ctrl
     q = $q;
+    //$q - allows you to run functions asynchronously and use their return values when they are finished.
   }));
 
   describe('when searching for a user', function() {
@@ -41,6 +43,7 @@ describe('GitUserSearchController', function() {
         }
       ]
     }
+
     beforeEach(function(){
       fakeSearch.query.and.returnValue(q.when({ data: gitHubSearchResponse }));
       //set return value of the function query
