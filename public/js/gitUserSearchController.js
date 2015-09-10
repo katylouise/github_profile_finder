@@ -7,8 +7,17 @@ githubUserSearch.controller('GitUserSearchController', ['Search', function(Searc
         .then(function(response) {
           console.log(response);
           self.searchResult = response.data;
-          self.searchResult.items = self.searchResult.items.slice(0, 9);
+          self.searchResult.items = self.searchResult.items.slice(0, 10);
+
+
+          if (self.searchResult.items.length !== 0) {
+            for (var i = 0; i < self.searchResult.items.length; i++) {
+              var username = self.searchResult.items[i]["login"];
+              console.log(username);
+            }
+          }
       });
     }
+
   };
 }]);

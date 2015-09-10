@@ -26,7 +26,7 @@ describe('Github Profile finder', function() {
     searchBox.sendKeys('spike');
     searchButton.click();
     element.all(by.repeater('user in searchCtrl.searchResult.items')).then(function(items) {
-        expect(items.length).toBe(30);
+        expect(items.length).toBe(10);
     });
   });
 
