@@ -53,7 +53,7 @@ describe('GitUserSearchController', function() {
     beforeEach(function(){
       fakeSearch.query.and.returnValue(q.when({ data: gitHubSearchResponse }));
       //set return value of the function query
-      fakeUserSearch.query.and.returnValue(q.when({ data: }));
+      fakeUserSearch.query.and.returnValue(q.when({ data: gitHubSearchResponse }));
     });
 
     it('displays search results', function() {

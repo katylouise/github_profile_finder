@@ -1,6 +1,7 @@
 describe('factory: Search', function() {
   var search;
-  var dummy = new Dummy();
+  //var dummy = new Dummy();
+  //var access_token = dummy.access_token;
 
   beforeEach(module('GitUserSearch'));
 
@@ -15,14 +16,14 @@ describe('factory: Search', function() {
     httpBackend
       .when("GET", "/key")
       .respond(
-        { access_token: dummy.access_token }
+        { access_token: "11087e404a09fbd66d5019318591dcbf8d45c98c" }
       );
   }));
 
   beforeEach(inject(function($httpBackend) {
     httpBackend = $httpBackend;
     httpBackend
-      .when("GET", "https://api.github.com/search/users?access_token=" + dummy.access_token + "&q=katy")
+      .when("GET", "https://api.github.com/search/users?access_token=11087e404a09fbd66d5019318591dcbf8d45c98c&q=tansaku")
       .respond(
         { items: items }
       );
@@ -34,11 +35,6 @@ describe('factory: Search', function() {
         "avatar_url": "https://avatars.githubusercontent.com/u/30216?v=3",
         "html_url": "https://github.com/tansaku"
       },
-      {
-        "login": "stephenlloyd",
-        "avatar_url": "https://avatars.githubusercontent.com/u/196474?v=3",
-        "html_url": "https://github.com/stephenlloyd"
-      }
     ];
 
   it('responds to query', function() {
@@ -46,7 +42,8 @@ describe('factory: Search', function() {
   });
 
   it('returns search results', function() {
-    search.query('katy')
+    httpBackend.flush();
+    search.query('tansaku')
       .then(function(response) {
         expect(response.data.items).toEqual(items)
       })
