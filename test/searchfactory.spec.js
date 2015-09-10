@@ -13,6 +13,15 @@ describe('factory: Search', function() {
   beforeEach(inject(function($httpBackend) {
     httpBackend = $httpBackend;
     httpBackend
+      .when("GET", "/key")
+      .respond(
+        { access_token: dummy.access_token }
+      );
+  }));
+
+  beforeEach(inject(function($httpBackend) {
+    httpBackend = $httpBackend;
+    httpBackend
       .when("GET", "https://api.github.com/search/users?access_token=" + dummy.access_token + "&q=katy")
       .respond(
         { items: items }
