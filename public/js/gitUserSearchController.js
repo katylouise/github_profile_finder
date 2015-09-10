@@ -1,6 +1,8 @@
 githubUserSearch.controller('GitUserSearchController', ['Search', function(Search) {
   var self = this;
-  var dummy = new Dummy();
+  var getAccessToken = $.getJSON("/", function(result) {
+    return result.access_token;
+  });
 
   self.doSearch = function() {
     if (self.searchTerm) {
