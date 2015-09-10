@@ -1,11 +1,10 @@
-githubUserSearch.controller('GitUserSearchController', ['Search', function(Search) {
+githubUserSearch.controller('GitUserSearchController', ['Search', 'UserSearch', function(Search, UserSearch) {
   var self = this;
 
   self.doSearch = function() {
     if (self.searchTerm) {
       Search.query(self.searchTerm)
         .then(function(response) {
-          console.log(response);
           self.searchResult = response.data;
           self.searchResult.items = self.searchResult.items.slice(0, 10);
 
@@ -13,7 +12,10 @@ githubUserSearch.controller('GitUserSearchController', ['Search', function(Searc
           if (self.searchResult.items.length !== 0) {
             for (var i = 0; i < self.searchResult.items.length; i++) {
               var username = self.searchResult.items[i]["login"];
-              console.log(username);
+              UserSearch.query(username).then(function(response) {
+                self.userData = response.data;
+                console.log(self.userData);
+              });
             }
           }
       });
