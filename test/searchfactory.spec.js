@@ -1,7 +1,7 @@
 describe('factory: Search', function() {
   var search;
-  //var dummy = new Dummy();
-  //var access_token = dummy.access_token;
+  var dummy = new Dummy();
+  var access_token = dummy.access_token;
 
   beforeEach(module('GitUserSearch'));
 
@@ -16,14 +16,14 @@ describe('factory: Search', function() {
     httpBackend
       .when("GET", "/key")
       .respond(
-        { access_token: "11087e404a09fbd66d5019318591dcbf8d45c98c" }
+        { access_token: dummy.access_token }
       );
   }));
 
   beforeEach(inject(function($httpBackend) {
     httpBackend = $httpBackend;
     httpBackend
-      .when("GET", "https://api.github.com/search/users?access_token=11087e404a09fbd66d5019318591dcbf8d45c98c&q=tansaku")
+      .when("GET", "https://api.github.com/search/users?access_token=" + access_token + "&q=tansaku")
       .respond(
         { items: items }
       );
