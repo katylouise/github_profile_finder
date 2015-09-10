@@ -5,10 +5,6 @@ githubUserSearch.factory('UserSearch', ['$http', function($http) {
     self.token = success.data;
   });
 
-  var usernameUrl = function(username) {
-    return queryUrl + username;
-  }
-
   return {
     query: function(username_url) {
       return $http({
