@@ -1,23 +1,21 @@
 githubUserSearch.factory('UserSearch', ['$http', function($http) {
   var queryUrl = 'https://api.github.com/users/';
-  var getAccessToken = function() {
-    $.getJSON("/", function(result) {
-      return result.access_token;
-    });
-  }
+  var accessToken = $http({method: 'GET', url: '/key'});
+  accessToken.then(function(success) {
+    self.token = success.data;
+  });
 
-  var accessToken = getAccessToken();
   var usernameUrl = function(username) {
     return queryUrl + username;
   }
 
   return {
-    query: function(username) {
+    query: function(username_url) {
       return $http({
-        url: usernameUrl(username),
+        url: username_url,
         method: 'GET',
         params: {
-          'access_token': accessToken
+          'access_token': self.token.access_token
         }
       });
     }

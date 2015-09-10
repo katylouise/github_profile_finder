@@ -1,12 +1,10 @@
 githubUserSearch.factory('Search', ['$http', function($http) {
   var queryUrl = 'https://api.github.com/search/users';
-  var getAccessToken = function() {
-    $.getJSON("/", function(result) {
-      return result.access_token;
-    });
-  }
 
-  var accessToken = getAccessToken();
+  var accessToken = $http({method: 'GET', url: '/key'});
+  accessToken.then(function(success) {
+    self.token = success.data;
+  });
 
   return {
     query: function(searchTerm) {
@@ -15,7 +13,7 @@ githubUserSearch.factory('Search', ['$http', function($http) {
         method: 'GET',
         params: {
           'q': searchTerm,
-          'access_token': accessToken
+          'access_token': self.token.access_token
         }
       });
     }

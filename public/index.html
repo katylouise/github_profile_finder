@@ -21,9 +21,11 @@
       </form>
       <p class="searched_for" ng-show="searchCtrl.searchTerm">Search results for {{ searchCtrl.searchTerm }}</p>
       <ul class="list-group" ng-show="searchCtrl.searchTerm">
-        <li ng-repeat="user in searchCtrl.searchResult.items">
+        <li ng-repeat="user in searchCtrl.userData">
           <img class="img-circle" ng-src="{{user.avatar_url}}&s=50" height="50" width="50">
-          <a ng-href="{{user.html_url}}">{{user.login}}</a>
+          <a ng-href="{{user.html_url}}">{{user.url}}</a>
+          <p>Followers: {{user.followers}}</p>
+          <p>Public repos: {{user.public_repos}}</p>
         </li>
       </ul>
       <p class="no_results" ng-show="searchCtrl.searchResult.items.length === 0">No results found.</p>

@@ -1,9 +1,12 @@
 require 'sinatra'
 require 'json'
 
-set :public_folder, 'public'
+APIKEY = ENV["GIT_ACCESS_TOKEN"]
 
 get '/' do
-  { access_token: ENV["GITHUB_ACCESS_TOKEN"] }.to_json
   send_file('public/index.html')
+end
+
+get '/key' do
+  { access_token: APIKEY }.to_json
 end
