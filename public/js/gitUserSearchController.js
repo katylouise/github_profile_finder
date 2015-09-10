@@ -8,13 +8,14 @@ githubUserSearch.controller('GitUserSearchController', ['Search', 'UserSearch', 
           self.searchResult = response.data;
           self.searchResult.items = self.searchResult.items.slice(0, 10);
 
-
           if (self.searchResult.items.length !== 0) {
+            var usernames = [];
             for (var i = 0; i < self.searchResult.items.length; i++) {
-              var username = self.searchResult.items[i]["login"];
-              UserSearch.query(username).then(function(response) {
+              usernames.push(self.searchResult.items[i]["login"]);
+            }
+            for (var i = 0; i < usernames.length; i++) {
+              UserSearch.query(usernames[i]).then(function(response) {
                 self.userData = response.data;
-                console.log(self.userData);
               });
             }
           }

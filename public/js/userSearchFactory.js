@@ -14,7 +14,7 @@ githubUserSearch.factory('UserSearch', ['$http', function($http) {
   return {
     query: function(username) {
       return $http({
-        url: usernameUrl(),
+        url: usernameUrl(username),
         method: 'GET',
         params: {
           'access_token': accessToken

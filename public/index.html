@@ -24,7 +24,6 @@
         <li ng-repeat="user in searchCtrl.searchResult.items">
           <img class="img-circle" ng-src="{{user.avatar_url}}&s=50" height="50" width="50">
           <a ng-href="{{user.html_url}}">{{user.login}}</a>
-
         </li>
       </ul>
       <p class="no_results" ng-show="searchCtrl.searchResult.items.length === 0">No results found.</p>
