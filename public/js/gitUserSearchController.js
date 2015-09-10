@@ -16,7 +16,6 @@ githubUserSearch.controller('GitUserSearchController', ['Search', 'UserSearch', 
               });
             }
             self.userData = users;
-            console.log(self.userData);
           }
       });
     }

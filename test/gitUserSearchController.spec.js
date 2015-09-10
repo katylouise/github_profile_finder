@@ -50,10 +50,21 @@ describe('GitUserSearchController', function() {
       ]
     }
 
+    var gitHubFakeUserData = [
+      {
+        login: "tansaku",
+        avatar_url: "https://avatars.githubusercontent.com/u/30216?v=3",
+        url: "https://api.github.com/users/tansaku",
+        html_url: "https://github.com/tansaku",
+        public_repos: 238,
+        followers: 197,
+      }
+    ]
+
     beforeEach(function(){
       fakeSearch.query.and.returnValue(q.when({ data: gitHubSearchResponse }));
       //set return value of the function query
-      fakeUserSearch.query.and.returnValue(q.when({ data: gitHubSearchResponse }));
+      fakeUserSearch.query.and.returnValue(q.when({ data: gitHubFakeUserData }));
     });
 
     it('displays search results', function() {
@@ -61,6 +72,7 @@ describe('GitUserSearchController', function() {
       ctrl.doSearch();
       scope.$apply(); //like httpBackend.flush() - this returns the necessary response
       expect(ctrl.searchResult.items).toEqual(gitHubSearchResponse.items);
+      expect(ctrl.userData[0]).toEqual(gitHubFakeUserData);
     });
   });
 
