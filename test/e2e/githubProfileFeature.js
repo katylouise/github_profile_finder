@@ -1,4 +1,11 @@
+var mock = require('protractor-http-mock');
+
 describe('Github Profile finder', function() {
+
+  beforeEach(function() {
+    mock(['tokenRequest.js']);
+  });
+
   var searchBox = element(by.model('searchCtrl.searchTerm'));
   var searchButton = element(by.className('btn'));
   var searchedFor = element(by.className('searched_for'));
@@ -16,16 +23,16 @@ describe('Github Profile finder', function() {
     searchBox.sendKeys('spike');
     searchButton.click();
 
-    var profiles = element.all(by.repeater('user in searchCtrl.searchResult.items'));
+    var profiles = element.all(by.repeater('user in searchCtrl.userData'));
     expect(searchedFor.getText()).toEqual("Search results for spike");
-    expect(profiles.get(1).getText()).toEqual('spike01');
+    expect(profiles.get(1).element(by.binding('user.login')).getText()).toEqual('spike01');
   });
 
 
   it('can count the number of spikes', function() {
     searchBox.sendKeys('spike');
     searchButton.click();
-    element.all(by.repeater('user in searchCtrl.searchResult.items')).then(function(items) {
+    element.all(by.repeater('user in searchCtrl.userData')).then(function(items) {
         expect(items.length).toBe(10);
     });
   });
@@ -34,9 +41,13 @@ describe('Github Profile finder', function() {
     searchBox.sendKeys('87398jflijf87938');
     searchButton.click();
     expect(searchResults.getText()).toEqual("No results found.");
-    element.all(by.repeater('user in searchCtrl.searchResult.items')).then(function(items) {
+    element.all(by.repeater('user in searchCtrl.userData')).then(function(items) {
       expect(items.length).toBe(0);
     });
+  });
+
+  afterEach(function() {
+    mock.teardown();
   });
 
   //   var profiles = element.all(by.repeater('user in searchCtrl.searchResult.items'));
