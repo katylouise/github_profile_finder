@@ -24,6 +24,7 @@ describe('factory: Search', function() {
     httpBackend = $httpBackend;
     httpBackend
       .when("GET", "https://api.github.com/search/users?access_token=" + access_token + "&q=tansaku")
+      //same as doing whenGET
       .respond(
         { items: items }
       );

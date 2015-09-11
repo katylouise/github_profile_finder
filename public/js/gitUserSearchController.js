@@ -22,3 +22,5 @@ githubUserSearch.controller('GitUserSearchController', ['Search', 'UserSearch', 
 
   };
 }]);
+
+//you can do this in a much neater way by chaining the thens together and calling from a single factory
