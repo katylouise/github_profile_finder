@@ -26,6 +26,7 @@ describe('GitUserSearchController', function() {
   });
 
   //you can do multiple injects but neater to have everything in one
+  //injects the modules which you need
   beforeEach(inject(function($q, $rootScope, $controller) {
     scope = $rootScope; //assign scope to root scope (global)
     ctrl = $controller('GitUserSearchController'); //controller to ctrl
@@ -71,11 +72,10 @@ describe('GitUserSearchController', function() {
       ctrl.searchTerm = 'tansaku';
       ctrl.doSearch();
       scope.$apply(); //like httpBackend.flush() - this returns the necessary response
+      //you can use scope.$digest() here instead - triggered when changes occur, such as defining the searchTerm
       expect(ctrl.searchResult.items).toEqual(gitHubSearchResponse.items);
       expect(ctrl.userData[0]).toEqual(gitHubFakeUserData);
     });
   });
-
-
 });
 

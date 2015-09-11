@@ -1,3 +1,5 @@
+var token = require('../access_token');
+
 module.exports = [
 {
   request: {
@@ -6,8 +8,7 @@ module.exports = [
   },
   response: {
     data: {
-      access_token: '11087e404a09fbd66d5019318591dcbf8d45c98c'
+      access_token: token.getToken()
     }
   }
 }]
-
